@@ -19,7 +19,7 @@ int main() {
   cv::namedWindow(WINDOW_NAME, cv::WINDOW_FULLSCREEN);
   cv::moveWindow(WINDOW_NAME, 0, 0);
 
-  VideoFaceDetector detector(CASCADE_FILE, camera, "tu");
+  VideoFaceDetector detector(CASCADE_FILE, camera, "Pham Thanh Tu");
   cv::Mat frame;
   //  double fps = 0, time_per_frame;
   int prev_x1 = 0, prev_y1 = 0, prev_x2 = 0, prev_y2 = 0, delta = 20;
@@ -50,12 +50,12 @@ int main() {
       else
         prev_y2 = box.br().y;
 
-      cv::rectangle(frame, box, cv::Scalar(255, 0, 0));
+      cv::rectangle(frame, box, cv::Scalar(255, 0, 0), 2);
       auto text = detector.name();
-      auto box_t = cv::Rect(box.x, box.br().y, box.width, 50);
-      cv::rectangle(frame, box_t, cv::Scalar(0, 0, 0), cv::FILLED);
+      auto box_t = cv::Rect(box.x, box.br().y, box.width, 40);
+      cv::rectangle(frame, box_t, cv::Scalar(255, 0, 0), cv::FILLED);
       cv::putText(frame, text, cv::Point(box.x + 10, box_t.br().y - 10),
-                  cv::FONT_HERSHEY_SIMPLEX, 1, cv::Scalar(255, 255, 255), 2);
+                  cv::FONT_HERSHEY_SIMPLEX, 0.8, cv::Scalar(255, 255, 255), 2);
     }
 
     cv::imshow(WINDOW_NAME, frame);
